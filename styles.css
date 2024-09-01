@@ -7,6 +7,8 @@ body {
     margin: 0;
     background-color: #f4f4f4;
     overflow-x: hidden; /* 가로 스크롤 방지 */
+    padding: 10px; /* 페이지 여백 추가 */
+    box-sizing: border-box; /* 여백을 포함하여 크기 계산 */
     flex-direction: column; /* 이미지와 버튼을 수직으로 정렬 */
 }
 
@@ -16,6 +18,7 @@ body {
     position: relative;
     width: 100%;
     max-width: 600px; /* 최대 너비 설정 */
+    box-sizing: border-box;
 }
 
 .start-image {
@@ -47,6 +50,7 @@ button:hover {
 
 #question-container {
     margin-bottom: 20px;
+    text-align: left; /* 질문을 왼쪽 정렬로 변경 */
 }
 
 #question-container p {
@@ -60,6 +64,7 @@ button:hover {
     justify-content: space-around;
     margin: 10px 0;
     align-items: center;
+    width: 100%;
 }
 
 .answers input[type="radio"] {
@@ -73,6 +78,7 @@ button:hover {
     flex-direction: column;
     align-items: center;
     cursor: pointer;
+    width: 100%; /* 모바일 화면에서 여백이 생기지 않도록 */
 }
 
 .answers label span {
@@ -83,7 +89,7 @@ button:hover {
     border: 2px solid #ccc;
     background-color: #f0f0f0;
     margin-bottom: 5px;
-    position: relative; /* 체크 마크 위치를 위해 상대적 위치로 설정 */
+    position: relative;
     transition: all 0.3s ease;
 }
 
@@ -113,17 +119,20 @@ button:hover {
 }
 
 #page-indicator {
-    position: absolute;
-    bottom: 60px; /* 프로그레스 바를 위한 공간 확보 */
+    position: fixed; /* 고정된 위치 */
+    bottom: 10px; /* 아래쪽에 여백 추가 */
     left: 50%;
     transform: translateX(-50%);
     font-size: 1em;
     color: #555;
+    background-color: white; /* 배경 색상 추가 */
+    padding: 5px 10px;
+    border-radius: 5px;
 }
 
 #progress-bar-container {
     position: absolute;
-    bottom: 20px;
+    bottom: 40px; /* 페이지 인디케이터와 겹치지 않도록 위로 올림 */
     left: 50%;
     transform: translateX(-50%);
     width: 80%;
@@ -148,7 +157,7 @@ button:hover {
 
 @media (max-width: 600px) {
     .answers {
-        flex-direction: row;
+        flex-direction: column;
         flex-wrap: nowrap;
     }
 
