@@ -158,7 +158,10 @@ button:hover {
 }
 
 #result-chart {
-    max-width: 600px;
+    max-width: 500px; /* 차트의 최대 너비를 500px로 설정 */
+    max-height: 500px; /* 차트의 최대 높이를 500px로 설정 */
+    width: 100%;
+    height: auto;
     margin: 0 auto;
 }
 
