@@ -93,6 +93,7 @@ button:hover {
     background-color: white;
     color: #007BFF;
     font-weight: bold;
+    font-size: 16px; /* 체크 기호 크기 */
 }
 
 #buttons-container {
