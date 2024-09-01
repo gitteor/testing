@@ -1,0 +1,176 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4;
+    overflow-x: hidden; /* 가로 스크롤 방지 */
+    padding: 10px; /* 페이지 여백 추가 */
+    box-sizing: border-box; /* 여백을 포함하여 크기 계산 */
+    flex-direction: column; /* 이미지와 버튼을 수직으로 정렬 */
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    width: 100%;
+    max-width: 600px; /* 최대 너비 설정 */
+    box-sizing: border-box;
+}
+
+.start-image {
+    max-width: 100%;
+    height: auto;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007BFF; /* 버튼 배경색 */
+    color: white; /* 버튼 텍스트 색 */
+    border: none; /* 테두리 제거 */
+    border-radius: 5px; /* 둥근 모서리 */
+    transition: background-color 0.3s ease; /* 마우스 오버 효과 */
+}
+
+button:hover {
+    background-color: #0056b3; /* 마우스 오버 시 배경색 */
+}
+
+#start-button {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#question-container {
+    margin-bottom: 20px;
+    text-align: left; /* 질문을 왼쪽 정렬로 변경 */
+}
+
+#question-container p {
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #333;
+}
+
+.answers {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0;
+    align-items: center;
+    width: 100%;
+}
+
+.answers input[type="radio"] {
+    display: none; /* 기본 라디오 버튼을 숨깁니다 */
+}
+
+.answers label {
+    font-size: 0.7em;
+    color: #555;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    width: 100%; /* 모바일 화면에서 여백이 생기지 않도록 */
+}
+
+.answers label span {
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    background-color: #f0f0f0;
+    margin-bottom: 5px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* 라디오 버튼이 체크되었을 때의 스타일 */
+.answers input[type="radio"]:checked + label span {
+    border-color: #007BFF;
+    background-color: white;
+    color: #007BFF;
+    font-weight: bold;
+}
+
+/* 체크 마크 스타일 */
+.answers input[type="radio"]:checked + label span::after {
+    content: '✔'; /* 체크 기호 */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px; /* 체크 기호 크기 */
+    color: #007BFF; /* 체크 기호 색상 */
+}
+
+#buttons-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+#page-indicator {
+    position: fixed; /* 고정된 위치 */
+    bottom: 10px; /* 아래쪽에 여백 추가 */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1em;
+    color: #555;
+    background-color: white; /* 배경 색상 추가 */
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+#progress-bar-container {
+    position: absolute;
+    bottom: 40px; /* 페이지 인디케이터와 겹치지 않도록 위로 올림 */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#progress-bar {
+    height: 100%;
+    background-color: #007BFF;
+    width: 0%;
+    border-radius: 5px;
+    transition: width 0.3s ease;
+}
+
+#result-chart {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+    .answers {
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+
+    .answers label {
+        font-size: 0.6em; /* 텍스트 크기 줄임 */
+        margin: 0 3px; /* 좌우 여백 조정 */
+    }
+
+    #page-indicator {
+        font-size: 0.9em;
+    }
+
+    #progress-bar-container {
+        width: 90%;
+    }
+}
