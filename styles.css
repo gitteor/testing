@@ -83,17 +83,27 @@ button:hover {
     border: 2px solid #ccc;
     background-color: #f0f0f0;
     margin-bottom: 5px;
+    position: relative; /* 체크 마크 위치를 위해 상대적 위치로 설정 */
     transition: all 0.3s ease;
 }
 
 /* 라디오 버튼이 체크되었을 때의 스타일 */
 .answers input[type="radio"]:checked + label span {
-    content: '✔'; /* 체크 기호 */
     border-color: #007BFF;
     background-color: white;
     color: #007BFF;
     font-weight: bold;
+}
+
+/* 체크 마크 스타일 */
+.answers input[type="radio"]:checked + label span::after {
+    content: '✔'; /* 체크 기호 */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     font-size: 16px; /* 체크 기호 크기 */
+    color: #007BFF; /* 체크 기호 색상 */
 }
 
 #buttons-container {
