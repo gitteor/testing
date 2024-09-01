@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,25 +7,22 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container" id="start-screen">
-        <h1 id="intro-text">학교폭력 예방을 위한 심리검사</h1>
-        <img src="student.png" alt="시작 이미지" class="start-image">
-        <div>
-            <button id="start-button">검사 시작</button>
-        </div>
+    <div id="start-screen" class="container">
+        <h1 id="intro-text">학교폭력 심리검사</h1>
+        <img src="start-image.jpg" alt="시작 이미지" class="start-image">
+        <button id="start-button">검사 시작</button>
     </div>
 
-    <div class="container" id="question-screen" style="display:none;">
-        <div id="question-container">
-            <!-- 질문 내용이 여기 삽입됩니다 -->
-        </div>
+    <div id="question-screen" class="container" style="display: none;">
+        <div id="question-container"></div>
         <div id="buttons-container">
             <button id="prev-button">이전</button>
+            <div id="page-indicator">1/7</div>
             <button id="next-button">다음</button>
         </div>
     </div>
 
-    <div class="container" id="result-screen" style="display:none;">
+    <div id="result-screen" class="container" style="display: none;">
         <canvas id="result-chart"></canvas>
     </div>
 
