@@ -120,14 +120,17 @@ button:hover {
 }
 
 #buttons-container {
-    max-width: 600px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     position: fixed; /* 버튼을 화면에 고정 */
-    bottom: 0; /* 화면 아래쪽에 고정 */
+    bottom: 10px; /* 화면 아래에서 약간 위로 위치 */
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
+    max-width: 600px;
     background-color: #f4f4f4; /* 배경색 추가 */
-    padding: 10px 20px; /* 여백 추가 */
+    padding: 10px 0; /* 여백 추가 */
     box-sizing: border-box; /* 패딩을 포함한 크기 계산 */
 }
 
