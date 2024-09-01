@@ -56,7 +56,7 @@ function updatePageIndicator() {
         pageIndicator.id = "page-indicator";
         document.body.appendChild(pageIndicator);
     }
-    pageIndicator.textContent = `페이지 ${currentQuestion + 1} / ${totalQuestions}`;
+    pageIndicator.textContent = `${currentQuestion + 1} / ${totalQuestions}`;
 }
 
 function updateProgressBar() {
