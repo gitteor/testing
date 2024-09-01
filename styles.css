@@ -86,7 +86,8 @@ button:hover {
     transition: all 0.3s ease;
 }
 
-.answers input[type="radio"]:checked + span {
+/* 라디오 버튼이 체크되었을 때의 스타일 */
+.answers input[type="radio"]:checked + label span {
     border-color: #007BFF;
     background-color: white;
     color: #007BFF;
