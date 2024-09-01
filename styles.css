@@ -122,8 +122,15 @@ button:hover {
 #buttons-container {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
+    position: fixed; /* 버튼을 화면에 고정 */
+    bottom: 0; /* 화면 아래쪽에 고정 */
+    left: 0;
+    width: 100%;
+    background-color: #f4f4f4; /* 배경색 추가 */
+    padding: 10px 20px; /* 여백 추가 */
+    box-sizing: border-box; /* 패딩을 포함한 크기 계산 */
 }
+
 
 #page-indicator {
     position: fixed; /* 고정된 위치 */
