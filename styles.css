@@ -88,6 +88,7 @@ button:hover {
 
 /* 라디오 버튼이 체크되었을 때의 스타일 */
 .answers input[type="radio"]:checked + label span {
+    content: '✔'; /* 체크 기호 */
     border-color: #007BFF;
     background-color: white;
     color: #007BFF;
