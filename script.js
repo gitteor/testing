@@ -127,7 +127,7 @@ function drawChart() {
     const data = {
         labels: ['스트레스', '감정 조절', '사회적 불안', '모험심', '계획성', '과거 회상', '자기 통제'],
         datasets: [{
-            label: '심리 검사 결과',
+            label: '검사 결과',
             data: scores,
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
             borderColor: 'rgba(54, 162, 235, 1)',
