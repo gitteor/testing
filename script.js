@@ -187,7 +187,6 @@ function displayResultText() {
         resultText = '매우 심각한 상황입니다. 담당 교사와 상담을 하세요.';
     }
 
-    // 결과 텍스트를 화면에 표시
     const resultScreen = document.getElementById("result-screen");
     const resultTextElem = document.createElement("p");
     resultTextElem.textContent = resultText;
@@ -195,5 +194,6 @@ function displayResultText() {
     resultTextElem.style.fontSize = "1.2em"; // 텍스트 크기 조정
     resultTextElem.style.textAlign = "center"; // 텍스트 중앙 정렬
     resultTextElem.style.color = "#333"; // 텍스트 색상 설정
+
     resultScreen.appendChild(resultTextElem);
 }
