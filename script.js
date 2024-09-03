@@ -138,7 +138,7 @@ function resetTest() {
 
 function displayHighestScoreLabel() {
     const highestScoreIndex = scores.indexOf(Math.max(...scores));
-    const highestScoreLabel = ['스트레스', '감정 조절', '사회적 불안', '모험심', '계획성', '과거 회상', '자기 통제'][highestScoreIndex];
+    const highestScoreLabel = ['신체폭력', '언어폭력', '금품갈취', '강요 행위', '따돌림', '성폭력', '사이버 폭력'][highestScoreIndex];
     const averageScore = scores.reduce((acc, val) => acc + val, 0) / scores.length;
 
     if (averageScore >= 1) {
