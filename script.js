@@ -130,20 +130,26 @@ function resetTest() {
     
     document.getElementById("result-screen").style.display = "none";
     document.getElementById("start-screen").style.display = "block";
-
-    averageScore = 0; // averageScore 초기화
-
+    
     // 페이지 인디케이터 다시 설정
     document.getElementById("page-indicator").style.display = "block";
     updatePageIndicator(); // 첫 번째 질문에 맞게 페이지 인디케이터 업데이트
+
+    // averageScore 초기화
+    averageScore = 0;
+
+    // 결과 텍스트 제거
+    const resultScreen = document.getElementById("result-screen");
+    while (resultScreen.firstChild) {
+        resultScreen.removeChild(resultScreen.firstChild);
+    }
 }
 
 function displayHighestScoreLabel() {
     const highestScoreIndex = scores.indexOf(Math.max(...scores));
     const highestScoreLabel = ['신체폭력', '언어폭력', '금품갈취', '강요 행위', '따돌림', '성폭력', '사이버 폭력'][highestScoreIndex];
-    const averageScore = scores.reduce((acc, val) => acc + val, 0) / scores.length;
 
-    if (scores[highestScoreIndex] >= 1) {
+    if (averageScore >= 1) {
         const resultScreen = document.getElementById("result-screen");
         const labelTextElem = document.createElement("p");
         labelTextElem.textContent = `당신의 학폭 MBTI 유형은 '${highestScoreLabel}'형 입니다.`;
@@ -162,6 +168,7 @@ function calculateScores() {
         let pageScore = selectedAnswers[i].reduce((acc, val) => acc + val, 0);
         scores[i] = pageScore / questions[i].length; // 평균 점수 계산
     }
+    averageScore = scores.reduce((acc, val) => acc + val, 0) / scores.length; // averageScore 계산
 }
 
 function drawChart() {
@@ -203,7 +210,6 @@ function drawChart() {
 }
 
 function displayResultText() {
-    const averageScore = scores.reduce((acc, val) => acc + val, 0) / scores.length;
     let resultText = '';
 
     if (averageScore < 0.3) {
