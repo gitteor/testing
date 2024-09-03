@@ -115,6 +115,8 @@ function resetTest() {
     document.getElementById("page-indicator").style.display = "block";
     updatePageIndicator(); // 첫 번째 질문에 맞게 페이지 인디케이터 업데이트
 
+    scores[highestScoreIndex] = 0;
+
     // 결과 텍스트 제거
     const resultScreen = document.getElementById("result-screen");
     while (resultScreen.firstChild) {
