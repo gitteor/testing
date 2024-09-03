@@ -142,7 +142,7 @@ function drawChart() {
     const ctx = document.getElementById('result-chart').getContext('2d');
 
     const data = {
-        labels: ['스트레스', '감정 조절', '사회적 불안', '모험심', '계획성', '과거 회상', '자기 통제'],
+        labels: ['신체폭력', '언어폭력', '금품갈취', '강요 행위', '따돌림', '성폭력', '사이버 폭력'],
         datasets: [{
             label: '검사 결과',
             data: scores,
