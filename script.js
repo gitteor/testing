@@ -108,21 +108,26 @@ function resetTest() {
     currentQuestion = 0;
     scores = Array(totalQuestions).fill(0);
     selectedAnswers = Array(totalQuestions).fill(null).map(() => []);
-    
+
     document.getElementById("result-screen").style.display = "none";
     document.getElementById("start-screen").style.display = "block";
-    // 페이지 인디케이터 다시 설정
     document.getElementById("page-indicator").style.display = "block";
-    updatePageIndicator(); // 첫 번째 질문에 맞게 페이지 인디케이터 업데이트
+    
+    // 첫 번째 질문에 맞게 페이지 인디케이터 업데이트
+    updatePageIndicator();
 
-    scores[highestScoreIndex] = 0;
-
-    // 결과 텍스트 제거
+    // 결과 화면의 모든 자식 요소 제거
     const resultScreen = document.getElementById("result-screen");
     while (resultScreen.firstChild) {
         resultScreen.removeChild(resultScreen.firstChild);
     }
+
+    // 차트 캔버스 다시 추가
+    const newCanvas = document.createElement("canvas");
+    newCanvas.id = "result-chart";
+    resultScreen.appendChild(newCanvas);
 }
+
 function displayHighestScoreLabel() {
     const highestScoreIndex = scores.indexOf(Math.max(...scores));
     const highestScoreLabel = ['신체폭력', '언어폭력', '금품갈취', '강요 행위', '따돌림', '성폭력', '사이버 폭력'][highestScoreIndex];
