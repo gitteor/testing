@@ -3,15 +3,9 @@ document.getElementById("start-button").addEventListener("click", startTest);
 let currentQuestion = 0;
 const totalQuestions = 7;
 let scores = Array(totalQuestions).fill(0);
+let selectedAnswers = Array(totalQuestions).fill(null).map(() => []); // 사용자가 선택한 답변을 저장할 배열
 const questions = [
-    ["1.신체를 손, 발로 때리는 등 고통을 가하는 행위를 한 적이 있다.(상해 폭행)", "2. 일정한 장소에서 쉽게 나오지 못하도록 하는 행위를 한 적이 있다.(감금)", "3. 강제(폭행, 협박)로 일정한 장소로 데리고 가는 행위를 한 적이 있다.(약취)", "4. 상대방을 속이거나 유혹해서 일정한 장소로 데리고 가는 행위를 한 적이 있다.(유인)", "5. 장난을 빙자한 꼬집기, 때리기, 힘껏 밀치기 등 상대학생이 폭력으로 인식하는 행위를 한 적이 있다."],
-    ["6. 여러 사람 앞에서 상대방의 명예를 훼손하는 구체적인 말(성격, 능력, 배경 등)을 하거나 그런 내용의 글을 인터넷, SNS 등으로 퍼뜨리는 행위(명예훼손)를 한 적이 있다.", "7. 신체 등에 해를 끼칠 듯한 언행(“죽을래” 등)과 문자메시지 등으로 겁을 주는 행위(협박)를 한 적이 있다."],
-    ["8. 돌려 줄 생각이 없으면서 돈을 요구하는 행위를 한 적이 있다.", "9. 옷, 문구류 등을 빌린다며 되돌려주지 않는 행위를 한 적이 있다.", "10. 일부러 물품을 망가뜨리는 행위를 한 적이 있다.", "11. 돈을 걷어오라고 하는 행위를 한 적이 있다.", "12. 흉기로 위협해 돈을 가져가는 행위를 한 적이 있다.","13. 주머니를 뒤져서 돈을 가져가는 행위","14. 몰래 물건이나 돈을 가져가는 행위를 한 적이 있다."],
-    ["15. 빵셔틀을 시킨 적이 있다.", "16. 심부름 강제로 시킨 적이 있다.", "17. 와이파이나 테더링 공유를 강요한 적이 있다.", "18. 과제 대행을 시킨 적이 있다.", "19. 게임 대행을 시킨 적이 있다."],
-    ["20. 여럿이 함께 피해 학생을 의도적, 반복적으로 피하는 행위를 한 적이 있다.", "21. 바보 취급, 놀리기, 빈정거림, 면박주기, 겁주기, 골탕 먹이기, 비웃기, 욕하기 행위를 한 적이 있다.", "22. 피해 학생이 다른 친구들과 놀지 못하도록 막는 행위를 한 적이 있다."],
-    ["23. 폭행, 협박을 통해 성행위를 강제하거나 유사 성행위, 성기에 이물질을 삽입하는 등의 행위를 한 적이 있다.", "24. 상대방에게 폭행과 협박을 하면서 성적 모멸감을 느끼도록 신체적 접촉을 하는 행위를 한 적이 있다.", "25. 성적인 말과 행동을 통해 설적 굴욕감, 수치감을 느끼도록 하는 행위를 한 적이 있다.", "26. 성적 접촉을 하고 도망가는 행위를 한 적이 있다."],
-    ["27. 속칭 사이버모욕, 사이버명예훼손, 사이버성희롱, 사이버스토킹, 사이버음란물 유통, 대화명 테러, 인증놀이, 게임부주 강요 등 정보통신기기를 이용하여 괴롭히는 행위를 한 적이 있다.", "28. 특정인에 대해 모욕적 언사나 욕설 등을 인터넷 게시판, 채팅, 카페 등에 올리는 행위(특정인에 대한 저격글이 그 한 형태임)를 한 적이 있다.", 
-     "29. 특정인에 대한 허위 글이나 개인의 사생활에 관한 사실을 인터넷, SNS 등을 통해 불특정 다수에 공개하는 행위를 한 적이 있다.", "30. 성적 수치심을 주거나, 위협하는 내용, 조롱하는 글, 그림, 동영상 등을 정보통신망을 통해 유포하는 행위를 한 적이 있다.", "31. 공포심이나 불안감을 유발하는 문자, 음향, 영상 등을 휴대폰 등 정보통신망을 통해 반복적으로 보내는 행위를 한 적이 있다.","32. 헤어진 여자친구에게 불안감을 조성하는 문자를 지속적으로 보내는 행위를 한 적이 있다."]
+    // 질문 데이터 그대로 유지
 ];
 
 function startTest() {
@@ -43,36 +37,26 @@ function showQuestion() {
             </div>
         `;
         container.appendChild(questionElem);
+
+        // 저장된 답변이 있으면 복원
+        if (selectedAnswers[currentQuestion][index] !== undefined) {
+            document.getElementById(`q${index}a${selectedAnswers[currentQuestion][index] + 1}`).checked = true;
+        }
     });
 
     updatePageIndicator();
     updateProgressBar();
 }
 
-function updatePageIndicator() {
-    let pageIndicator = document.getElementById("page-indicator");
-    if (!pageIndicator) {
-        pageIndicator = document.createElement("div");
-        pageIndicator.id = "page-indicator";
-        document.body.appendChild(pageIndicator);
-    }
-    pageIndicator.textContent = `${currentQuestion + 1} / ${totalQuestions}`;
-}
-
-function updateProgressBar() {
-    const progressBar = document.getElementById("progress-bar");
-    const progressPercentage = ((currentQuestion + 1) / totalQuestions) * 100;
-    progressBar.style.width = `${progressPercentage}%`;
-}
-
 document.getElementById("next-button").addEventListener("click", () => {
     if (validateAnswers()) {
-        updateScores();
+        saveAnswers(); // 현재 페이지의 답변을 저장
+
         if (currentQuestion < totalQuestions - 1) {
             currentQuestion++;
             showQuestion();
         } else {
-            showResult();
+            showResult(); // 마지막 페이지를 넘어갈 때 점수 집계
         }
     } else {
         alert("모든 문항에 답변을 선택해주세요.");
@@ -81,6 +65,7 @@ document.getElementById("next-button").addEventListener("click", () => {
 
 document.getElementById("prev-button").addEventListener("click", () => {
     if (currentQuestion > 0) {
+        saveAnswers(); // 현재 페이지의 답변을 저장
         currentQuestion--;
         showQuestion();
     }
@@ -97,15 +82,14 @@ function validateAnswers() {
     return allAnswered;
 }
 
-function updateScores() {
-    let pageScore = 0;
-    document.querySelectorAll(`#question-container input[type="radio"]:checked`).forEach((input) => {
-        pageScore += parseInt(input.value);
+function saveAnswers() {
+    document.querySelectorAll(`#question-container input[type="radio"]:checked`).forEach((input, index) => {
+        selectedAnswers[currentQuestion][index] = parseInt(input.value); // 선택한 답변을 저장
     });
-    scores[currentQuestion] = pageScore / questions[currentQuestion].length; // 평균 점수 계산
 }
 
 function showResult() {
+    calculateScores(); // 결과 화면에 진입할 때 점수 집계
     document.getElementById("question-screen").style.display = "none";
     document.getElementById("result-screen").style.display = "block";
     drawChart();
@@ -119,6 +103,13 @@ function showResult() {
     document.getElementById("result-screen").appendChild(restartButton);
     document.getElementById("page-indicator").style.display = "none"; // 결과 페이지에서 페이지 표시 제거
     document.getElementById("progress-bar-container").style.display = "none"; // 결과 페이지에서 프로그레스 바 제거
+}
+
+function calculateScores() {
+    for (let i = 0; i < totalQuestions; i++) {
+        let pageScore = selectedAnswers[i].reduce((acc, val) => acc + val, 0);
+        scores[i] = pageScore / questions[i].length; // 평균 점수 계산
+    }
 }
 
 function drawChart() {
