@@ -118,9 +118,8 @@ function resetTest() {
 function displayHighestScoreLabel() {
     const highestScoreIndex = scores.indexOf(Math.max(...scores));
     const highestScoreLabel = ['신체폭력', '언어폭력', '금품갈취', '강요 행위', '따돌림', '성폭력', '사이버 폭력'][highestScoreIndex];
-    const averageScore = scores.reduce((acc, val) => acc + val, 0) / scores.length;
-
-    if (averageScore >= 1) {
+    
+    if (scores[highestScoreIndex] >= 1) {
         const resultScreen = document.getElementById("result-screen");
         const labelTextElem = document.createElement("p");
         labelTextElem.textContent = `당신의 학폭 MBTI 유형은 '${highestScoreLabel}'형 입니다.`;
@@ -169,19 +168,20 @@ function drawChart() {
     });
 }
 function displayResultText() {
-    const averageScore = scores.reduce((acc, val) => acc + val, 0) / scores.length;
+    const highestScoreIndex = scores.indexOf(Math.max(...scores));
+    const highestScoreLabel = ['신체폭력', '언어폭력', '금품갈취', '강요 행위', '따돌림', '성폭력', '사이버 폭력'][highestScoreIndex];
     let resultText = '';
-    if (averageScore < 0.3) {
+    if (scores[highestScoreIndex] < 0.3) {
         resultText = '당신이 겪고 있는 모든 감정은 정상입니다. 불편함, 불안, 혹은 화가 날 수 있습니다. 이러한 감정을 인정하고 표현하는 것이 중요합니다.';
-    } else if (averageScore >= 0.3 && averageScore < 0.6) {
+    } else if (scores[highestScoreIndex] >= 0.3 && scores[highestScoreIndex] < 0.6) {
         resultText = '경미한 피해라도 당신의 느낌과 경험은 중요합니다. 자신을 돌보고, 필요할 때 도움을 요청하는 것을 두려워하지 마세요. 당신은 자신의 상황을 개선할 수 있는 힘을 가지고 있습니다.';
-    } else if (averageScore >= 0.6 && averageScore < 1.0) {
+    } else if (scores[highestScoreIndex] >= 0.6 && scores[highestScoreIndex] < 1.0) {
         resultText = '신뢰할 수 있는 친구나 선생님, 가족과 상황을 공유하세요. 가볍게 여겨지는 상황도 소통을 통해 해결될 수 있으며, 당신이 느끼는 불편함을 경감시킬 수 있습니다.';
-    } else if (averageScore >= 1.0 && averageScore < 1.3) {
+    } else if (scores[highestScoreIndex] >= 1.0 && scores[highestScoreIndex] < 1.3) {
         resultText = '발생한 사건의 날짜, 시간, 장소, 관련자 및 상황에 대해 간단히 기록하세요. 경미한 사건이라도, 추후 필요할 때 정확한 상황을 설명하는 데 도움이 됩니다.';
-    } else if (averageScore >= 1.3 && averageScore < 1.5) {
+    } else if (scores[highestScoreIndex] >= 1.3 && scores[highestScoreIndex] < 1.5) {
         resultText = '당신을 불편하게 하는 사람이나 상황에 대해 명확한 경계를 설정하세요. 필요한 경우, "이런 행동은 나를 불편하게 해"라고 친절하게 표현하는 것이 좋습니다.';
-    } else if (averageScore >= 1.5 && averageScore < 2.0) {
+    } else if (scores[highestScoreIndex] >= 1.5 && scores[highestScoreIndex] < 2.0) {
         resultText = '상황이 개선되지 않거나, 정서적으로 어려움을 겪고 있다면 전문가의 도움을 받는 것을 고려하세요. 상담은 감정을 정리하고 해결책을 모색하는 데 도움을 줄 수 있습니다.';
     } else {
         resultText = '매우 심각한 상황입니다. 담당 교사와 상담을 하세요.';
