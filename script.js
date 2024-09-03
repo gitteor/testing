@@ -109,6 +109,7 @@ function showResult() {
     document.getElementById("question-screen").style.display = "none";
     document.getElementById("result-screen").style.display = "block";
     drawChart();
+    displayHighestScoreLabel(); // 가장 높은 항목의 label을 표시
     displayResultText(); // 결과 텍스트 표시
 
     const restartButton = document.createElement("button");
@@ -133,6 +134,25 @@ function resetTest() {
     // 페이지 인디케이터 다시 설정
     document.getElementById("page-indicator").style.display = "block";
     updatePageIndicator(); // 첫 번째 질문에 맞게 페이지 인디케이터 업데이트
+}
+
+function displayHighestScoreLabel() {
+    const highestScoreIndex = scores.indexOf(Math.max(...scores));
+    const highestScoreLabel = ['스트레스', '감정 조절', '사회적 불안', '모험심', '계획성', '과거 회상', '자기 통제'][highestScoreIndex];
+    const averageScore = scores.reduce((acc, val) => acc + val, 0) / scores.length;
+
+    if (averageScore >= 1) {
+        const resultScreen = document.getElementById("result-screen");
+        const labelTextElem = document.createElement("p");
+        labelTextElem.textContent = `당신의 학폭 MBTI 유형은 '${highestScoreLabel}'형 입니다.`;
+        labelTextElem.style.marginTop = "20px"; // 그래프와의 간격을 위해 여백 추가
+        labelTextElem.style.fontSize = "1.2em"; // 텍스트 크기 조정
+        labelTextElem.style.textAlign = "center"; // 텍스트 중앙 정렬
+        labelTextElem.style.color = "#333"; // 텍스트 색상 설정
+        labelTextElem.style.fontWeight = "bold"; // Bold체 적용
+
+        resultScreen.appendChild(labelTextElem);
+    }
 }
 
 function calculateScores() {
