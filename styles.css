@@ -51,6 +51,7 @@ button:hover {
 }
 
 #start-button {
+    margin: 0px;
     position: absolute;
     bottom: -60px;
     left: 50%;
