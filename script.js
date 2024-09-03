@@ -3,7 +3,7 @@ document.getElementById("start-button").addEventListener("click", startTest);
 let currentQuestion = 0;
 const totalQuestions = 7;
 let scores = Array(totalQuestions).fill(0);
-let selectedAnswers = Array(totalQuestions).fill(null).map(() => []); // 사용자가 선택한 답변을 저장할 배열
+let selectedAnswers = Array(totalQuestions).fill(null).map(() => []);
 const questions = [
     ["1.신체를 손, 발로 때리는 등 고통을 가하는 행위를 한 적이 있다.(상해 폭행)", "2. 일정한 장소에서 쉽게 나오지 못하도록 하는 행위를 한 적이 있다.(감금)", "3. 강제(폭행, 협박)로 일정한 장소로 데리고 가는 행위를 한 적이 있다.(약취)", "4. 상대방을 속이거나 유혹해서 일정한 장소로 데리고 가는 행위를 한 적이 있다.(유인)", "5. 장난을 빙자한 꼬집기, 때리기, 힘껏 밀치기 등 상대학생이 폭력으로 인식하는 행위를 한 적이 있다."],
     ["6. 여러 사람 앞에서 상대방의 명예를 훼손하는 구체적인 말(성격, 능력, 배경 등)을 하거나 그런 내용의 글을 인터넷, SNS 등으로 퍼뜨리는 행위(명예훼손)를 한 적이 있다.", "7. 신체 등에 해를 끼칠 듯한 언행(“죽을래” 등)과 문자메시지 등으로 겁을 주는 행위(협박)를 한 적이 있다."],
@@ -45,7 +45,6 @@ function showQuestion() {
         `;
         container.appendChild(questionElem);
 
-        // 저장된 답변이 있으면 복원
         if (selectedAnswers[currentQuestion][index] !== undefined) {
             document.getElementById(`q${index}a${selectedAnswers[currentQuestion][index] + 1}`).checked = true;
         }
@@ -57,13 +56,13 @@ function showQuestion() {
 
 document.getElementById("next-button").addEventListener("click", () => {
     if (validateAnswers()) {
-        saveAnswers(); // 현재 페이지의 답변을 저장
+        saveAnswers();
 
         if (currentQuestion < totalQuestions - 1) {
             currentQuestion++;
             showQuestion();
         } else {
-            showResult(); // 마지막 페이지를 넘어갈 때 점수 집계
+            showResult(); // 마지막 페이지에서 결과 표시
         }
     } else {
         alert("모든 문항에 답변을 선택해주세요.");
@@ -72,7 +71,7 @@ document.getElementById("next-button").addEventListener("click", () => {
 
 document.getElementById("prev-button").addEventListener("click", () => {
     if (currentQuestion > 0) {
-        saveAnswers(); // 현재 페이지의 답변을 저장
+        saveAnswers();
         currentQuestion--;
         showQuestion();
     }
@@ -91,15 +90,16 @@ function validateAnswers() {
 
 function saveAnswers() {
     document.querySelectorAll(`#question-container input[type="radio"]:checked`).forEach((input, index) => {
-        selectedAnswers[currentQuestion][index] = parseInt(input.value); // 선택한 답변을 저장
+        selectedAnswers[currentQuestion][index] = parseInt(input.value);
     });
 }
 
 function showResult() {
-    calculateScores(); // 결과 화면에 진입할 때 점수 집계
+    calculateScores(); // 점수 집계
     document.getElementById("question-screen").style.display = "none";
     document.getElementById("result-screen").style.display = "block";
     drawChart();
+    displayResultText(); // 결과 텍스트 표시
 
     const restartButton = document.createElement("button");
     restartButton.textContent = "처음으로";
@@ -108,8 +108,8 @@ function showResult() {
     });
 
     document.getElementById("result-screen").appendChild(restartButton);
-    document.getElementById("page-indicator").style.display = "none"; // 결과 페이지에서 페이지 표시 제거
-    document.getElementById("progress-bar-container").style.display = "none"; // 결과 페이지에서 프로그레스 바 제거
+    document.getElementById("page-indicator").style.display = "none";
+    document.getElementById("progress-bar-container").style.display = "none";
 }
 
 function calculateScores() {
@@ -117,16 +117,6 @@ function calculateScores() {
         let pageScore = selectedAnswers[i].reduce((acc, val) => acc + val, 0);
         scores[i] = pageScore / questions[i].length; // 평균 점수 계산
     }
-}
-
-function updatePageIndicator() {
-    let pageIndicator = document.getElementById("page-indicator");
-    if (!pageIndicator) {
-        pageIndicator = document.createElement("div");
-        pageIndicator.id = "page-indicator";
-        document.body.appendChild(pageIndicator);
-    }
-    pageIndicator.textContent = `${currentQuestion + 1} / ${totalQuestions}`;
 }
 
 function drawChart() {
@@ -148,15 +138,15 @@ function drawChart() {
         data: data,
         options: {
             scale: {
-                min: 0, // 중앙값을 0으로 고정
-                max: 3, // 최대값을 3으로 고정
+                min: 0,
+                max: 3,
                 ticks: {
-                    beginAtZero: true, // 이 설정이 중앙을 0으로 고정합니다.
-                    min: 0,             // 중앙값을 0으로 고정
-                    max: 3,             // 가장자리를 3으로 고정
-                    stepSize: 0.5,      // 0.5 단위로 눈금을 표시
+                    beginAtZero: true,
+                    min: 0,
+                    max: 3,
+                    stepSize: 0.5,
                     callback: function(value) {
-                        return value.toFixed(1); // 소수점 한 자리로 표시
+                        return value.toFixed(1);
                     }
                 },
                 pointLabels: {
@@ -166,3 +156,36 @@ function drawChart() {
         }
     });
 }
+
+function displayResultText() {
+    const averageScore = scores.reduce((acc, val) => acc + val, 0) / scores.length;
+    let resultText = '';
+
+    if (averageScore < 0.3) {
+        resultText = '당신이 겪고 있는 모든 감정은 정상입니다. 불편함, 불안, 혹은 화가 날 수 있습니다. 이러한 감정을 인정하고 표현하는 것이 중요합니다.';
+    } else if (averageScore >= 0.3 && averageScore < 0.6) {
+        resultText = '경미한 피해라도 당신의 느낌과 경험은 중요합니다. 자신을 돌보고, 필요할 때 도움을 요청하는 것을 두려워하지 마세요. 당신은 자신의 상황을 개선할 수 있는 힘을 가지고 있습니다.';
+    } else if (averageScore >= 0.6 && averageScore < 1.0) {
+        resultText = '신뢰할 수 있는 친구나 선생님, 가족과 상황을 공유하세요. 가볍게 여겨지는 상황도 소통을 통해 해결될 수 있으며, 당신이 느끼는 불편함을 경감시킬 수 있습니다.';
+    } else if (averageScore >= 1.0 && averageScore < 1.3) {
+        resultText = '발생한 사건의 날짜, 시간, 장소, 관련자 및 상황에 대해 간단히 기록하세요. 경미한 사건이라도, 추후 필요할 때 정확한 상황을 설명하는 데 도움이 됩니다.';
+    } else if (averageScore >= 1.3 && averageScore < 1.5) {
+        resultText = '당신을 불편하게 하는 사람이나 상황에 대해 명확한 경계를 설정하세요. 필요한 경우, "이런 행동은 나를 불편하게 해"라고 친절하게 표현하는 것이 좋습니다.';
+    } else if (averageScore >= 1.5 && averageScore < 2.0) {
+        resultText = '상황이 개선되지 않거나, 정서적으로 어려움을 겪고 있다면 전문가의 도움을 받는 것을 고려하세요. 상담은 감정을 정리하고 해결책을 모색하는 데 도움을 줄 수 있습니다.';
+    } else {
+        resultText = '매우 심각한 상황입니다. 담당 교사와 상담을 하세요.';
+    }
+
+    // 결과 텍스트를 화면에 표시
+    const resultScreen = document.getElementById("result-screen");
+    const resultTextElem = document.createElement("p");
+    resultTextElem.textContent = resultText;
+    resultTextElem.style.marginTop = "20px"; // 그래프와의 간격을 위해 여백 추가
+    resultTextElem.style.fontSize = "1.2em"; // 텍스트 크기 조정
+    resultTextElem.style.textAlign = "center"; // 텍스트 중앙 정렬
+    resultTextElem.style.color = "#333"; // 텍스트 색상 설정
+
+    resultScreen.appendChild(resultTextElem);
+}
+
