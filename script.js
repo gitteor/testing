@@ -119,6 +119,16 @@ function calculateScores() {
     }
 }
 
+function updatePageIndicator() {
+    let pageIndicator = document.getElementById("page-indicator");
+    if (!pageIndicator) {
+        pageIndicator = document.createElement("div");
+        pageIndicator.id = "page-indicator";
+        document.body.appendChild(pageIndicator);
+    }
+    pageIndicator.textContent = `${currentQuestion + 1} / ${totalQuestions}`;
+}
+
 function drawChart() {
     const ctx = document.getElementById('result-chart').getContext('2d');
 
