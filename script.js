@@ -114,6 +114,12 @@ function resetTest() {
     // 페이지 인디케이터 다시 설정
     document.getElementById("page-indicator").style.display = "block";
     updatePageIndicator(); // 첫 번째 질문에 맞게 페이지 인디케이터 업데이트
+
+    // 결과 텍스트 제거
+    const resultScreen = document.getElementById("result-screen");
+    while (resultScreen.firstChild) {
+        resultScreen.removeChild(resultScreen.firstChild);
+    }
 }
 function displayHighestScoreLabel() {
     const highestScoreIndex = scores.indexOf(Math.max(...scores));
