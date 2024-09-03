@@ -124,29 +124,7 @@ function displayHighestScoreLabel() {
         const resultScreen = document.getElementById("result-screen");
         const labelTextElem = document.createElement("p");
         labelTextElem.textContent = `당신의 학폭 MBTI 유형은 '${highestScoreLabel}'형 입니다.`;
-
-    
-          
-            
-    
-
-          
-          Expand Down
-          
-            
-    
-
-          
-          Expand Up
-    
-    @@ -220,7 +220,6 @@ function displayResultText() {
-  
-        labelTextElem.style.marginTop = "20px"; // 그래프와의 간격을 위해 여백 추가
-        labelTextElem.style.fontSize = "1.2em"; // 텍스트 크기 조정
-        labelTextElem.style.textAlign = "center"; // 텍스트 중앙 정렬
-        labelTextElem.style.color = "#333"; // 텍스트 색상 설정
-        labelTextElem.style.fontWeight = "bold"; // Bold체 적용
-        resultScreen.appendChild(labelTextElem);
+        resultText = '매우 심각한 상황입니다. 담당 교사와 상담을 하세요.';
     }
 }
 function calculateScores() {
