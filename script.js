@@ -114,12 +114,21 @@ function showResult() {
     const restartButton = document.createElement("button");
     restartButton.textContent = "처음으로";
     restartButton.addEventListener("click", () => {
-        location.reload();
+        resetTest(); // 테스트 리셋 함수 호출
     });
 
     document.getElementById("result-screen").appendChild(restartButton);
     document.getElementById("page-indicator").style.display = "none";
     document.getElementById("progress-bar-container").style.display = "none";
+}
+
+function resetTest() {
+    currentQuestion = 0;
+    scores = Array(totalQuestions).fill(0);
+    selectedAnswers = Array(totalQuestions).fill(null).map(() => []);
+    
+    document.getElementById("result-screen").style.display = "none";
+    document.getElementById("start-screen").style.display = "block";
 }
 
 function calculateScores() {
