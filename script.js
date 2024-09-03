@@ -141,7 +141,7 @@ function displayHighestScoreLabel() {
     const highestScoreLabel = ['신체폭력', '언어폭력', '금품갈취', '강요 행위', '따돌림', '성폭력', '사이버 폭력'][highestScoreIndex];
     const averageScore = scores.reduce((acc, val) => acc + val, 0) / scores.length;
 
-    if (averageScore >= 1) {
+    if (scores[highestScoreIndex] >= 1) {
         const resultScreen = document.getElementById("result-screen");
         const labelTextElem = document.createElement("p");
         labelTextElem.textContent = `당신의 학폭 MBTI 유형은 '${highestScoreLabel}'형 입니다.`;
@@ -220,7 +220,6 @@ function displayResultText() {
         resultText = '매우 심각한 상황입니다. 담당 교사와 상담을 하세요.';
     }
 
-    // 결과 텍스트를 화면에 표시
     const resultScreen = document.getElementById("result-screen");
     const resultTextElem = document.createElement("p");
     resultTextElem.textContent = resultText;
