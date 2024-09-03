@@ -131,6 +131,8 @@ function resetTest() {
     document.getElementById("result-screen").style.display = "none";
     document.getElementById("start-screen").style.display = "block";
 
+    averageScore = 0; // averageScore 초기화
+
     // 페이지 인디케이터 다시 설정
     document.getElementById("page-indicator").style.display = "block";
     updatePageIndicator(); // 첫 번째 질문에 맞게 페이지 인디케이터 업데이트
